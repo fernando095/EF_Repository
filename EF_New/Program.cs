@@ -9,13 +9,26 @@ namespace EF_New
         {
             //Inserir();
             Listar();
-            Excluir();
+            //Excluir();
+            Editar();
             Listar();
             Estudante fernando = new Estudante();
             
             Console.ReadLine();
         }
 
+        static void Editar()
+        {
+            Estudante result;
+            using (var context = new ApplicationDbContext())
+            {
+                result = context.Estudantes.Where(x => x.Nome == "Roberto").FirstOrDefault();
+                result.Nome = "Fernando";
+                context.Estudantes.Update(result);
+                context.SaveChanges();
+
+            }
+        }
         static void Excluir()
         {
             using( var context = new ApplicationDbContext())
@@ -32,7 +45,7 @@ namespace EF_New
                 var estudante = context.Estudantes.ToList();
                 foreach (var item in estudante)
                 {
-                    Console.WriteLine(item.ToString());
+                    Console.WriteLine(item);
                 }
             }
         }
