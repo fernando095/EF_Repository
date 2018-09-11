@@ -9,10 +9,10 @@ namespace EF_New
         {
             //Inserir();
             Listar();
+            InserirEstudanteEndereco();
             //Excluir();
-            Editar();
+            //Editar();
             Listar();
-            Estudante fernando = new Estudante();
             
             Console.ReadLine();
         }
@@ -22,7 +22,7 @@ namespace EF_New
             Estudante result;
             using (var context = new ApplicationDbContext())
             {
-                result = context.Estudantes.Where(x => x.Nome == "Roberto").FirstOrDefault();
+                result = context.Estudantes.Where(x => x.Nome == "Fernando").FirstOrDefault();
                 result.Nome = "Fernando";
                 context.Estudantes.Update(result);
                 context.SaveChanges();
@@ -33,7 +33,7 @@ namespace EF_New
         {
             using( var context = new ApplicationDbContext())
             {
-                var filter = context.Estudantes.Where(x => x.Nome == "Roberto").FirstOrDefault();
+                var filter = context.Estudantes.Where(x => x.Nome == "Fernando").FirstOrDefault();
                 context.Remove(filter);
                 context.SaveChanges();
             }
@@ -55,13 +55,32 @@ namespace EF_New
             {
                 Estudante estudantes = new Estudante()
                 {
-                    Nome = "Francisco"
+                    Nome = "Fernando"
                 };
                 context.Add(estudantes);
 
                 context.SaveChanges();
             }
             Console.WriteLine("Salvou");
+        }
+
+        static void InserirEstudanteEndereco()
+        {
+            Estudante estudante = new Estudante()
+            {
+                Nome = "Estudante 1",
+                Idade = 22,
+                Enderecos = new Endereco()
+                {
+                    Rua = "Jamelao"
+                }
+            };
+
+            using(var context = new ApplicationDbContext())
+            {
+                context.Add(estudante);
+                context.SaveChanges();
+            }
         }
     }
 
@@ -70,9 +89,20 @@ namespace EF_New
         public int Id { get; set; }
         public string Nome { get; set; }
 
+        public int Idade { get; set; }
+
+        public Endereco Enderecos { get; set; }
+
         public override string ToString()
         {
             return "Id: " + Id + " Nome: " + Nome;
         }
+    }
+
+    class Endereco
+    {
+        public int Id { get; set; }
+        public string Rua { get; set; }
+        public int EstudanteId { get; set; }
     }
 }

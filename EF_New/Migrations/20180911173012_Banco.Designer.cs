@@ -11,8 +11,8 @@ using System;
 namespace EF_New.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180910232650_inicial")]
-    partial class inicial
+    [Migration("20180911173012_Banco")]
+    partial class Banco
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,6 +25,8 @@ namespace EF_New.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Idade");
 
                     b.Property<string>("Nome");
 
