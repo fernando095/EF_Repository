@@ -10,6 +10,8 @@ namespace EF_New
     {
         public DbSet<Estudante> Estudantes { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Turma> Turmas { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
